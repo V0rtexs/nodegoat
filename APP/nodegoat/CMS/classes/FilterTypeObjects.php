@@ -212,6 +212,11 @@ class FilterTypeObjects extends GenerateTypeObjects {
 					
 				} else {
 					
+					foreach ($arr_object_subs as $value) {
+						if (!preg_match('/^[a-zA-Z0-9_]+$/', trim($value))) {
+							throw new ValueError('Invalid input');
+						}
+					}
 					$sql_where = "WHERE nodegoat_tos.id IN (".implode(',', $arr_object_subs).")";
 				}
 				
