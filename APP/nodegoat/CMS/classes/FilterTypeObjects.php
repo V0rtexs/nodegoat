@@ -972,6 +972,11 @@ class FilterTypeObjects extends GenerateTypeObjects {
 			if ($arr_filter_collect['object_versioning']['users']['self']) {
 				$arr_user_ids = array_merge($arr_user_ids, $this->arr_scope['users']);
 			}
+			foreach ($arr_user_ids as $user_id) {
+				if (!preg_match('/^[a-zA-Z0-9_]+$/', $user_id)) {
+					throw new Exception('Invalid input');
+				}
+			}
 			$sql_user_ids = implode(',', $arr_user_ids);
 			$sql_users_operator_not = ($arr_filter_collect['object_versioning']['users']['exclude'] ? 'NOT' : '');
 		}
